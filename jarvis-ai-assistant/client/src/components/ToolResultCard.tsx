@@ -138,11 +138,11 @@ function NewsCard({ result }: { result: Record<string, unknown> }) {
       <div className="tool-card--news">
         {headlines.map((item, i) => (
           <div key={i} className="tool-card__headline">
-            {item.source && (
+            {item.source ? (
               <span className="tool-card__source">
                 [{String(item.source)}]
               </span>
-            )}
+            ) : null}
             {String(item.title || item.headline || '')}
           </div>
         ))}

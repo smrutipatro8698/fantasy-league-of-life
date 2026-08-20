@@ -44,7 +44,7 @@ export async function execute(input: { city: string }) {
   try {
     const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(input.city)}&count=1`;
     const geoResponse = await fetch(geoUrl);
-    const geoData = await geoResponse.json();
+    const geoData: any = await geoResponse.json();
 
     if (!geoData.results || geoData.results.length === 0) {
       return { error: `Could not find location: ${input.city}` };
@@ -54,7 +54,7 @@ export async function execute(input: { city: string }) {
 
     const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&temperature_unit=fahrenheit`;
     const weatherResponse = await fetch(weatherUrl);
-    const weatherData = await weatherResponse.json();
+    const weatherData: any = await weatherResponse.json();
 
     const current = weatherData.current;
     const weatherCode = current.weather_code as number;
